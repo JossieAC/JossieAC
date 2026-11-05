@@ -1,0 +1,1866 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JOSSIE | Diseñador Hipermedia</title>
+
+<style>
+
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --fondo: #0d0d10;
+    --fondo-card: #15151b;
+    --azul: #5b8cff;
+    --azul-claro: #8db1ff;
+    --texto: #ffffff;
+    --texto-secundario: #a9a9b7;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+section {
+    padding: 100px 7%;
+    scroll-margin-top: 90px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* =========================
+   MENÚ PRINCIPAL
+========================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 13, 0.94);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+nav {
+    max-width: 1400px;
+    height: 75px;
+    margin: auto;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--azul);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.menu a {
+    color: #c8c8d0;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: var(--azul);
+}
+
+/* BOTÓN HAMBURGUESA */
+
+.menu-btn {
+    display: none;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    border: 1px solid #33333d;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-btn span {
+    width: 22px;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+}
+
+.menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* =========================
+   BANNER ANIMADO
+========================= */
+
+.banner {
+    margin-top: 75px;
+    height: 65px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #151d39;
+    border-top: 1px solid rgba(91,140,255,0.25);
+    border-bottom: 1px solid rgba(91,140,255,0.25);
+}
+
+.banner-track {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+    width: max-content;
+    flex-shrink: 0;
+    animation: moverBanner 25s linear infinite;
+}
+
+.banner-track span {
+    color: var(--azul-claro);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.banner-track .banner-brand {
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.banner-brand span {
+    color: var(--azul);
+}
+
+.banner-star {
+    color: var(--azul);
+    font-size: 22px;
+}
+
+.banner:hover .banner-track {
+    animation-play-state: paused;
+}
+
+@keyframes moverBanner {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================
+   INICIO
+========================= */
+
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(51,83,170,0.25),
+            transparent 35%
+        ),
+        var(--fondo);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero-small {
+    color: var(--azul-claro);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 7vw, 95px);
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    color: var(--azul);
+}
+
+.hero p {
+    max-width: 650px;
+    color: var(--texto-secundario);
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--azul);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(91,140,255,0.3);
+}
+
+.btn-outline {
+    border: 1px solid #34343e;
+    color: white;
+}
+
+.btn-outline:hover {
+    border-color: var(--azul);
+}
+
+/* =========================
+   ELEMENTO 3D
+========================= */
+
+.scene-3d {
+    width: 100%;
+    height: 390px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.cube {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    transform-style: preserve-3d;
+    animation: rotarCubo 12s linear infinite;
+}
+
+.cube-face {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(141,177,255,0.8);
+    background: rgba(35,63,125,0.55);
+    box-shadow:
+        inset 0 0 30px rgba(91,140,255,0.2),
+        0 0 25px rgba(91,140,255,0.1);
+    color: white;
+    font-size: 65px;
+    font-weight: 900;
+    backface-visibility: visible;
+}
+
+.cube-face span {
+    color: var(--azul-claro);
+}
+
+.front {
+    transform: translateZ(85px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(85px);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(85px);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(85px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(85px);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(85px);
+}
+
+@keyframes rotarCubo {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.section-title {
+    margin-bottom: 55px;
+}
+
+.section-title h2 {
+    font-size: clamp(38px, 5vw, 65px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.section-title p {
+    color: var(--texto-secundario);
+    font-size: 17px;
+}
+
+/* =========================
+   SOBRE MÍ
+========================= */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.profile-card {
+    min-height: 450px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 25px;
+    background:
+        radial-gradient(circle, rgba(60,90,180,0.25), transparent 55%),
+        #101116;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(91,140,255,0.5);
+    border-radius: 50%;
+    animation: girar 20s linear infinite;
+}
+
+.profile-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.profile-initial {
+    font-size: 150px;
+    line-height: 1;
+    font-weight: 900;
+    text-shadow: 0 0 50px rgba(91,140,255,0.4);
+}
+
+.profile-content h3 {
+    font-size: 30px;
+}
+
+.profile-content p {
+    color: var(--texto-secundario);
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.about-text h3 {
+    font-size: 34px;
+    margin-bottom: 25px;
+}
+
+.about-text h3 span {
+    color: var(--azul);
+}
+
+.about-text p {
+    color: var(--texto-secundario);
+    margin-bottom: 25px;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.skill-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.skill-top span:last-child {
+    color: var(--azul-claro);
+}
+
+.skill-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 10px;
+    background: #262631;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--azul);
+}
+
+/* =========================
+   SERVICIOS
+========================= */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.service {
+    padding: 30px;
+    background: var(--fondo-card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.service:hover {
+    transform: translateY(-8px);
+    border-color: var(--azul);
+    background: #191b25;
+}
+
+.service-number {
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.service h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.service p {
+    color: var(--texto-secundario);
+    font-size: 15px;
+}
+
+/* =========================
+   PROYECTOS
+========================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.project {
+    overflow: hidden;
+    background: var(--fondo-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: translateY(-6px);
+    border-color: var(--azul);
+}
+
+.project-visual {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.visual-1 {
+    background: linear-gradient(135deg, #101b35, #263e6a);
+}
+
+.visual-ui {
+    width: 170px;
+    height: 220px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #11131c;
+    border: 4px solid #52658c;
+    transform: rotate(-7deg);
+}
+
+.visual-ui-line {
+    width: 70%;
+    height: 10px;
+    background: var(--azul);
+    margin-bottom: 20px;
+}
+
+.visual-ui-box {
+    height: 50px;
+    background: #25334f;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.visual-2 {
+    background: linear-gradient(135deg, #271b3c, #654080);
+}
+
+.visual-circle {
+    width: 170px;
+    height: 170px;
+    border: 28px solid #c2a0ff;
+    border-radius: 50%;
+}
+
+.visual-3 {
+    background: linear-gradient(135deg, #12352f, #276c5d);
+}
+
+.visual-web {
+    width: 75%;
+    height: 180px;
+    padding: 15px;
+    background: #0d201d;
+    border: 3px solid #5c9587;
+    transform: rotate(3deg);
+}
+
+.visual-web-top {
+    height: 15px;
+    background: #285d51;
+}
+
+.visual-web-content {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.visual-web-box {
+    flex: 1;
+    height: 105px;
+    background: #347b6c;
+}
+
+.visual-4 {
+    background: linear-gradient(135deg, #41251c, #8a4e32);
+}
+
+.visual-brand {
+    font-size: 90px;
+    font-weight: 900;
+    transform: rotate(-8deg);
+}
+
+.visual-brand span {
+    color: #ffbd94;
+}
+
+.project-info {
+    padding: 25px;
+}
+
+.project-info span {
+    color: var(--azul-claro);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.project-info h3 {
+    font-size: 23px;
+    margin: 10px 0;
+}
+
+.project-info p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+/* =========================
+   CONTENIDO MULTIMEDIA
+========================= */
+
+.video-box {
+    min-height: 280px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background:
+        radial-gradient(circle at 80% 30%, rgba(91,140,255,0.2), transparent 40%),
+        #14151d;
+    display: flex;
+    align-items: center;
+    padding: 45px;
+}
+
+.video-content {
+    max-width: 600px;
+}
+
+.video-content h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.video-content p {
+    color: var(--texto-secundario);
+    margin-bottom: 25px;
+}
+
+/* =========================
+   CONTACTO
+========================= */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.contact-info h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.contact-info > p {
+    color: var(--texto-secundario);
+    margin-bottom: 35px;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 25px;
+}
+
+.contact-item small {
+    color: var(--azul-claro);
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.contact-item a:hover {
+    color: var(--azul);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 16px;
+    background: var(--fondo-card);
+    border: 1px solid #30303b;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--azul);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+form button {
+    align-self: flex-start;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 7%;
+    background: #09090c;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    color: #888894;
+    font-size: 13px;
+}
+
+/* =========================
+   ANIMACIÓN DE ENTRADA
+========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 1000px) {
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .scene-3d {
+        height: 300px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        max-width: 550px;
+        width: 100%;
+        margin: auto;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        gap: 35px;
+    }
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 0 6%;
+    }
+
+    /* MOSTRAR HAMBURGUESA */
+
+    .menu-btn {
+        display: flex;
+    }
+
+    /* MENÚ DESPLEGABLE */
+
+    .menu {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: #101014;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0 7%;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu.active {
+        max-height: 400px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .menu li:last-child {
+        border-bottom: none;
+    }
+
+    .menu a {
+        display: block;
+        font-size: 16px;
+    }
+
+    /* BANNER */
+
+    .banner {
+        height: 55px;
+    }
+
+    .banner-track {
+        gap: 32px;
+        animation-duration: 20s;
+    }
+
+    .banner-track span {
+        font-size: 11px;
+    }
+
+    .banner-track .banner-brand {
+        font-size: 21px;
+    }
+
+    /* SECCIONES */
+
+    section {
+        padding: 75px 6%;
+    }
+
+    .hero {
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 10vw, 65px);
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .scene-3d {
+        height: 260px;
+    }
+
+    .cube {
+        transform: scale(0.8);
+    }
+
+    .section-title {
+        margin-bottom: 35px;
+    }
+
+    .profile-card {
+        min-height: 350px;
+    }
+
+    .profile-card::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .profile-initial {
+        font-size: 110px;
+    }
+
+    .skills {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid,
+    .projects-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-visual {
+        height: 240px;
+    }
+
+    .video-box {
+        padding: 30px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        padding: 30px 6%;
+    }
+}
+
+/* =========================
+   REDUCIR MOVIMIENTO
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+    }
+
+    .banner-track,
+    .cube,
+    .profile-card::before {
+        animation: none !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     MENÚ
+========================= -->
+
+<header>
+
+    <nav>
+
+        <a href="#inicio" class="logo">
+            J<span>O</span>SSIE
+        </a>
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="menu"
+            type="button">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+        <ul class="menu" id="menu">
+
+            <li><a href="#inicio">Inicio</a></li>
+
+            <li><a href="#sobre-mi">Acerca de mí</a></li>
+
+            <li><a href="#servicios">Mis servicios</a></li>
+
+            <li><a href="#proyectos">Mis proyectos</a></li>
+
+            <li><a href="#contacto">Contacto</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- =========================
+     BANNER ANIMADO
+========================= -->
+
+<div class="banner">
+
+    <div class="banner-track">
+
+        <span class="banner-brand">J<span>O</span>SSIE.</span>
+        <span>DISEÑO HIPERMEDIA</span>
+        <span class="banner-star">✳</span>
+        <span>CREATIVIDAD</span>
+        <span class="banner-star">✳</span>
+        <span>DISEÑO WEB</span>
+        <span class="banner-star">✳</span>
+        <span>UX/UI</span>
+        <span class="banner-star">✳</span>
+        <span>MULTIMEDIA</span>
+        <span class="banner-star">✳</span>
+
+        <span class="banner-brand">J<span>O</span>SSIE.</span>
+        <span>DISEÑO HIPERMEDIA</span>
+        <span class="banner-star">✳</span>
+        <span>CREATIVIDAD</span>
+        <span class="banner-star">✳</span>
+        <span>DISEÑO WEB</span>
+        <span class="banner-star">✳</span>
+        <span>UX/UI</span>
+        <span class="banner-star">✳</span>
+        <span>MULTIMEDIA</span>
+        <span class="banner-star">✳</span>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     INICIO
+========================= -->
+
+<section id="inicio" class="hero">
+
+    <div class="container hero-grid">
+
+        <div class="hero-content reveal">
+
+            <div class="hero-small">
+                Diseñador Hipermedia
+            </div>
+
+            <h1>
+                Diseño ideas<br>
+                que <span>cobran vida.</span>
+            </h1>
+
+            <p>
+                Creo experiencias visuales, digitales e interactivas
+                combinando creatividad, tecnología y diseño.
+                Mi objetivo es transformar ideas en proyectos
+                que comuniquen, conecten e inspiren.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#proyectos" class="btn btn-primary">
+                    Ver mis proyectos
+                </a>
+
+                <a href="#contacto" class="btn btn-outline">
+                    Contactarme
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ELEMENTO 3D -->
+
+        <div class="scene-3d reveal">
+
+            <div class="cube">
+
+                <div class="cube-face front">
+                    J<span>.</span>
+                </div>
+
+                <div class="cube-face back">
+                    <span>3D</span>
+                </div>
+
+                <div class="cube-face right">
+                    <span>UX</span>
+                </div>
+
+                <div class="cube-face left">
+                    <span>UI</span>
+                </div>
+
+                <div class="cube-face top">
+                    <span>JA</span>
+                </div>
+
+                <div class="cube-face bottom">
+                    <span>WEB</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     SOBRE MÍ
+========================= -->
+
+<section id="sobre-mi">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Sobre mí</h2>
+
+            <p>
+                Conoce mi perfil, mis habilidades
+                y mi manera de entender el diseño.
+            </p>
+
+        </div>
+
+        <div class="about-grid">
+
+            <div class="profile-card reveal">
+
+                <div class="profile-content">
+
+                    <div class="profile-initial">
+                        J
+                    </div>
+
+                    <h3>Jossie</h3>
+
+                    <p>Diseñador Hipermedia</p>
+
+                </div>
+
+            </div>
+
+            <div class="about-text reveal">
+
+                <h3>
+                    Soy Jossie,
+                    <span>Diseñador Hipermedia.</span>
+                </h3>
+
+                <p>
+                    Me apasiona transformar ideas en experiencias
+                    visuales y digitales. Mi enfoque combina
+                    creatividad, diseño y tecnología para desarrollar
+                    proyectos que comuniquen de manera clara y atractiva.
+                </p>
+
+                <p>
+                    Durante mi formación he trabajado en proyectos
+                    de diseño gráfico, interfaces, prototipos,
+                    páginas web, contenido multimedia y experiencias
+                    interactivas.
+                </p>
+
+                <div class="skills">
+
+                    <div class="skill">
+
+                        <div class="skill-top">
+                            <span>Diseño UX/UI</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width:90%"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-top">
+                            <span>Diseño Web</span>
+                            <span>85%</span>
+                        </div>
+
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width:85%"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-top">
+                            <span>Diseño Gráfico</span>
+                            <span>88%</span>
+                        </div>
+
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width:88%"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-top">
+                            <span>Multimedia</span>
+                            <span>82%</span>
+                        </div>
+
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width:82%"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     SERVICIOS
+========================= -->
+
+<section id="servicios">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Mis servicios</h2>
+
+            <p>
+                Soluciones visuales y digitales para convertir
+                ideas en experiencias.
+            </p>
+
+        </div>
+
+        <div class="services-grid">
+
+            <article class="service reveal">
+
+                <div class="service-number">01</div>
+
+                <h3>Diseño UX/UI</h3>
+
+                <p>
+                    Diseño de interfaces y experiencias centradas
+                    en las necesidades del usuario.
+                </p>
+
+            </article>
+
+            <article class="service reveal">
+
+                <div class="service-number">02</div>
+
+                <h3>Diseño Web</h3>
+
+                <p>
+                    Creación y prototipado de experiencias
+                    web modernas y funcionales.
+                </p>
+
+            </article>
+
+            <article class="service reveal">
+
+                <div class="service-number">03</div>
+
+                <h3>Diseño Gráfico</h3>
+
+                <p>
+                    Identidad visual, piezas gráficas,
+                    composición y comunicación visual.
+                </p>
+
+            </article>
+
+            <article class="service reveal">
+
+                <div class="service-number">04</div>
+
+                <h3>Multimedia</h3>
+
+                <p>
+                    Imagen, video, sonido y producción
+                    de contenido audiovisual.
+                </p>
+
+            </article>
+
+            <article class="service reveal">
+
+                <div class="service-number">05</div>
+
+                <h3>Prototipado</h3>
+
+                <p>
+                    Desarrollo de prototipos interactivos
+                    para probar ideas y experiencias.
+                </p>
+
+            </article>
+
+            <article class="service reveal">
+
+                <div class="service-number">06</div>
+
+                <h3>Creatividad</h3>
+
+                <p>
+                    Desarrollo de conceptos y soluciones
+                    visuales para diferentes proyectos.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     PROYECTOS
+========================= -->
+
+<section id="proyectos">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Algunos de mis proyectos</h2>
+
+            <p>
+                Una selección de proyectos y experiencias
+                desarrolladas durante mi formación.
+            </p>
+
+        </div>
+
+        <div class="projects-grid">
+
+            <article class="project reveal">
+
+                <div class="project-visual visual-1">
+
+                    <div class="visual-ui">
+
+                        <div class="visual-ui-line"></div>
+
+                        <div class="visual-ui-box"></div>
+
+                        <div class="visual-ui-box"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <span>UX / UI</span>
+
+                    <h3>Diseño de interfaces</h3>
+
+                    <p>
+                        Propuesta de interfaz digital
+                        y experiencia de usuario.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="project reveal">
+
+                <div class="project-visual visual-2">
+
+                    <div class="visual-circle"></div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <span>Branding</span>
+
+                    <h3>Identidad visual</h3>
+
+                    <p>
+                        Desarrollo de concepto gráfico,
+                        formas y comunicación visual.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="project reveal">
+
+                <div class="project-visual visual-3">
+
+                    <div class="visual-web">
+
+                        <div class="visual-web-top"></div>
+
+                        <div class="visual-web-content">
+
+                            <div class="visual-web-box"></div>
+
+                            <div class="visual-web-box"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <span>Diseño Web</span>
+
+                    <h3>Experiencia web</h3>
+
+                    <p>
+                        Diseño y estructura de un
+                        sitio web interactivo.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="project reveal">
+
+                <div class="project-visual visual-4">
+
+                    <div class="visual-brand">
+                        JA<span>.</span>
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <span>Diseño gráfico</span>
+
+                    <h3>Concepto visual</h3>
+
+                    <p>
+                        Composición, tipografía
+                        y desarrollo de identidad.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     MULTIMEDIA
+========================= -->
+
+<section id="multimedia">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Contenido multimedia</h2>
+
+            <p>
+                También desarrollo contenido audiovisual
+                y experiencias multimedia.
+            </p>
+
+        </div>
+
+        <div class="video-box reveal">
+
+            <div class="video-content">
+
+                <h3>Mi trabajo también se mueve.</h3>
+
+                <p>
+                    Aquí puedes incorporar tus videos,
+                    cortometrajes, proyectos audiovisuales
+                    y trabajos realizados durante tu formación.
+                </p>
+
+                <a href="#contacto" class="btn btn-primary">
+                    Ver más proyectos
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     CONTACTO
+========================= -->
+
+<section id="contacto">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Contacto</h2>
+
+            <p>
+                ¿Tienes una idea o proyecto? Hablemos.
+            </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-info reveal">
+
+                <h3>Trabajemos juntos.</h3>
+
+                <p>
+                    Estoy abierto a nuevas ideas,
+                    proyectos creativos y oportunidades
+                    relacionadas con el diseño y la multimedia.
+                </p>
+
+                <div class="contact-item">
+
+                    <small>EMAIL</small>
+
+                    <a href="mailto:jossie202077@gmail.com">
+                        jossie202077@gmail.com
+                    </a>
+
+                </div>
+
+                <div class="contact-item">
+
+                    <small>TELÉFONO</small>
+
+                    <a href="tel:3204523897">
+                        320 452 3897
+                    </a>
+
+                </div>
+
+                <div class="contact-item">
+
+                    <small>REDES SOCIALES</small>
+
+                    <a href="https://www.instagram.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Instagram
+                    </a>
+
+                    <a href="https://www.behance.net/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Behance
+                    </a>
+
+                    <a href="https://www.linkedin.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        LinkedIn
+                    </a>
+
+                </div>
+
+            </div>
+
+            <form id="contactForm" class="reveal">
+
+                <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Tu nombre"
+                    required>
+
+                <input
+                    type="email"
+                    name="correo"
+                    placeholder="Tu correo electrónico"
+                    required>
+
+                <textarea
+                    name="mensaje"
+                    placeholder="Cuéntame sobre tu proyecto..."
+                    required></textarea>
+
+                <button type="submit" class="btn btn-primary">
+                    Enviar mensaje
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div>
+        © 2026 JOSSIE — Diseñador Hipermedia
+    </div>
+
+    <div>
+        Diseño · Tecnología · Creatividad
+    </div>
+
+</footer>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   MENÚ HAMBURGUESA
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+
+function cerrarMenu() {
+    menu.classList.remove("active");
+    menuBtn.classList.remove("active");
+
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.setAttribute("aria-label", "Abrir menú");
+}
+
+menuBtn.addEventListener("click", function() {
+
+    const abierto = menu.classList.toggle("active");
+
+    menuBtn.classList.toggle("active", abierto);
+
+    menuBtn.setAttribute("aria-expanded", abierto);
+
+    menuBtn.setAttribute(
+        "aria-label",
+        abierto ? "Cerrar menú" : "Abrir menú"
+    );
+
+});
+
+/* CERRAR AL SELECCIONAR UNA OPCIÓN */
+
+document.querySelectorAll(".menu a").forEach(function(link) {
+
+    link.addEventListener("click", function() {
+        cerrarMenu();
+    });
+
+});
+
+/* CERRAR AL TOCAR FUERA */
+
+document.addEventListener("click", function(event) {
+
+    const clicDentroMenu = menu.contains(event.target);
+    const clicBoton = menuBtn.contains(event.target);
+
+    if (!clicDentroMenu && !clicBoton) {
+        cerrarMenu();
+    }
+
+});
+
+/* CERRAR AL CAMBIAR A PANTALLA GRANDE */
+
+window.addEventListener("resize", function() {
+
+    if (window.innerWidth > 700) {
+        cerrarMenu();
+    }
+
+});
+
+/* =========================
+   ANIMACIONES AL SCROLL
+========================= */
+
+const elementos = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+
+    const observer = new IntersectionObserver(function(entradas) {
+
+        entradas.forEach(function(entrada) {
+
+            if (entrada.isIntersecting) {
+
+                entrada.target.classList.add("active");
+
+                observer.unobserve(entrada.target);
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.15
+    });
+
+    elementos.forEach(function(elemento) {
+        observer.observe(elemento);
+    });
+
+} else {
+
+    elementos.forEach(function(elemento) {
+        elemento.classList.add("active");
+    });
+
+}
+
+/* =========================
+   FORMULARIO DE CONTACTO
+========================= */
+
+const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const datos = new FormData(contactForm);
+
+    const nombre = datos.get("nombre").trim();
+    const correo = datos.get("correo").trim();
+    const mensaje = datos.get("mensaje").trim();
+
+    if (!nombre || !correo || !mensaje) {
+
+        alert("Por favor completa todos los campos.");
+
+        return;
+
+    }
+
+    const asunto = encodeURIComponent(
+        "Contacto desde el portafolio de " + nombre
+    );
+
+    const cuerpo = encodeURIComponent(
+        "Nombre: " + nombre +
+        "\nCorreo: " + correo +
+        "\n\nMensaje:\n" + mensaje
+    );
+
+    const enlaceCorreo =
+        "mailto:jossie202077@gmail.com" +
+        "?subject=" + asunto +
+        "&body=" + cuerpo;
+
+    window.location.href = enlaceCorreo;
+
+});
+
+/* =========================
+   ACCESIBILIDAD DEL MENÚ
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        cerrarMenu();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
